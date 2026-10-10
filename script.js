@@ -5,7 +5,7 @@ const CONFIG = {
   // เวลาที่เริ่มคบกัน (เวลาไทย +07:00)
   start: '2023-10-28T18:00:00+07:00',
 
-  // รูปทั้งหมด อยู่ในโฟลเดอร์ photos/ — ถ้ายังไม่มีไฟล์ จะขึ้นกรอบชมพูบอกชื่อไฟล์แทน
+  // รูปทั้งหมด อยู่ในโฟลเดอร์ photos/ — ถ้ายังไม่มีไฟล์ จะขึ้นเป็นกรอบขาวเปล่าแทน
   photos: {
     cover: 'photos/cover.jpg',      // รูปในหัวใจลูกไม้ (การ์ดในซอง)
     strip1: 'photos/strip-1.jpg',   // ฟิล์ม 3 ช่อง หน้านับเวลา
@@ -48,14 +48,15 @@ const rand = (a, b) => a + Math.random() * (b - a);
 
 function pinHash(s) { let h = 5381; for (const c of s) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0; return h; }
 
-function placeholder(label) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="#f3d6dc"/><path d="M150 205 C110 175 85 155 85 127 C85 108 99 95 117 95 C131 95 143 104 150 116 C157 104 169 95 183 95 C201 95 215 108 215 127 C215 155 190 175 150 205Z" fill="#e8a7b5"/><text x="150" y="245" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#8e2a3a">${label}</text></svg>`;
+function placeholder() {
+  // กรอบรูปสีขาวชั่วคราว — ใส่รูปจริงในโฟลเดอร์ photos/ แล้วจะแทนที่เอง
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="#ffffff"/><rect x="1" y="1" width="298" height="298" fill="none" stroke="#efe6e0" stroke-width="2"/></svg>`;
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
 function setPhoto(el, src) {
   const isSvg = el instanceof SVGElement;
-  const fallback = placeholder(src);
+  const fallback = placeholder();
   el.addEventListener('error', () => { isSvg ? el.setAttribute('href', fallback) : (el.src = fallback); }, { once: true });
   isSvg ? el.setAttribute('href', src) : (el.src = src);
 }
