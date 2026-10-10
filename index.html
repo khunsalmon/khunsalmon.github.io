@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy 3rd Anniversary ♡</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Mali:wght@400;500;600&family=Sriracha&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PAGE 1 : LOCK ============ -->
+<div id="lock" class="stripes">
+  <div class="lock-card paper">
+    <svg class="lock-heart" viewBox="-14 -14 228 208" aria-hidden="true">
+      <path class="lace-outer" d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/>
+      <path class="lace-inner" d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/>
+      <path class="lace-stitch" d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/>
+      <g class="padlock" transform="translate(100 82)">
+        <path d="M-18 -6 V-18 A18 18 0 0 1 18 -18 V-6" fill="none" stroke="#6e1423" stroke-width="7" stroke-linecap="round"/>
+        <rect x="-28" y="-8" width="56" height="44" rx="9" fill="#6e1423"/>
+        <path d="M0 26 C-10 18 -14 13 -14 8 C-14 3 -10 0 -6 0 C-3 0 -1 2 0 4 C1 2 3 0 6 0 C10 0 14 3 14 8 C14 13 10 18 0 26Z" fill="#f3c6cf"/>
+      </g>
+    </svg>
+    <h1 class="script lock-title">Our Little Secret</h1>
+    <p class="lock-sub">ใส่รหัสลับที่มีแค่เราสองคนรู้</p>
+    <div class="pin-dots" id="pinDots" aria-live="polite"></div>
+    <p class="lock-msg" id="lockMsg">&nbsp;</p>
+    <div class="keypad" id="keypad">
+      <button>1</button><button>2</button><button>3</button>
+      <button>4</button><button>5</button><button>6</button>
+      <button>7</button><button>8</button><button>9</button>
+      <button data-k="hint" class="k-soft" aria-label="คำใบ้">?</button><button>0</button><button data-k="del" class="k-soft" aria-label="ลบ">⌫</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SITE ============ -->
+<main id="site" hidden>
+  <nav class="dots-nav" id="dotsNav" aria-label="pages"></nav>
+
+  <!-- PAGE 2 : ENVELOPE -->
+  <section class="page dots-bg" id="p-letter" data-label="จดหมาย">
+    <div class="deco-stars" aria-hidden="true"></div>
+    <p class="tag">No.01 · a letter for you</p>
+    <h2 class="script big-title">You've got mail</h2>
+    <p class="sub">แตะที่ซองเพื่อเปิดนะ ♡</p>
+
+    <div class="envelope-wrap">
+      <button class="envelope" id="envelope" aria-label="เปิดซองจดหมาย">
+        <span class="env-back"></span>
+        <span class="env-card">
+          <span class="script">Happy</span>
+          <b>3rd Anniversary</b>
+          <span class="mini-heart">♥</span>
+        </span>
+        <svg class="env-pocket" viewBox="0 0 100 66" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="0,0 52,36 0,66" fill="#efdfc6"/>
+          <polygon points="100,0 48,36 100,66" fill="#ead8bc"/>
+          <polygon points="0,66 50,30 100,66" fill="#f4e8d4"/>
+          <polyline points="0,66 50,30 100,66" fill="none" stroke="#d8c0a0" stroke-width=".5"/>
+        </svg>
+        <svg class="env-flap" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="0,0 50,40 100,0" fill="#e6d0b0"/>
+          <polyline points="0,0 50,40 100,0" fill="none" stroke="#d2b893" stroke-width=".5"/>
+        </svg>
+        <span class="seal">♥</span>
+      </button>
+      <p class="tap-hint" id="tapHint">tap ♡</p>
+    </div>
+    <button class="reopen" id="reopen" hidden>อ่านจดหมายอีกครั้ง ✉</button>
+    <a class="next" href="#p-counter">เลื่อนลงไปต่อ ↓</a>
+  </section>
+
+  <!-- LETTER MODAL -->
+  <div class="letter-modal" id="letterModal" hidden>
+    <article class="letter paper">
+      <button class="x" id="closeLetter" aria-label="ปิด">×</button>
+      <header class="letter-head">
+        <span class="script l-happy">Happy</span>
+        <span class="l-anni">ANNIVERSARY</span>
+        <span class="l-years"><b>3</b> years of us</span>
+      </header>
+      <div class="lace-frame">
+        <svg viewBox="-14 -14 228 208">
+          <defs><clipPath id="heartClip"><path d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/></clipPath></defs>
+          <path class="lace-outer" d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/>
+          <path class="lace-inner" d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/>
+          <image data-photo="cover" clip-path="url(#heartClip)" x="0" y="0" width="200" height="175" preserveAspectRatio="xMidYMid slice"/>
+          <path class="lace-stitch" d="M100 170 C40 125 0 95 0 55 C0 25 22 3 52 3 C75 3 92 18 100 35 C108 18 125 3 148 3 C178 3 200 25 200 55 C200 95 160 125 100 170Z"/>
+        </svg>
+      </div>
+      <!-- ✏️ แก้ข้อความในจดหมายได้ตรงนี้ -->
+      <div class="letter-body">
+        <p>ถึง คนที่สำคัญที่สุดของเรา,</p>
+        <p>สุขสันต์วันครบรอบ 3 ปีนะ 💌<br>
+        ขอบคุณที่อยู่ข้างกันมาตลอด 1,096 วัน ทั้งวันที่สดใส และวันที่เหนื่อยจนไม่อยากพูดอะไร
+        ขอบคุณที่ทำให้วันธรรมดากลายเป็นวันพิเศษ และขอบคุณที่ยังเลือกกันและกันทุกวัน</p>
+        <p>ปีที่ 4 ก็จับมือกันไปต่อนะ ไปกินโมโม่อีกร้อยรอบ ซูชิโร่อีกพันจาน
+        ส่งชิบะอีกหมื่นตัว แล้วก็ไปอิตาลีด้วยกัน 🇮🇹</p>
+        <p class="sign">รักที่สุดเลย,<br>— คนของตัวเอง ♡</p>
+      </div>
+      <p class="l-date">28 · 10 · 2023 &nbsp;—&nbsp; 28 · 10 · 2026</p>
+      <a class="btn" href="#p-counter" id="letterNext">ไปหน้าถัดไป ♡</a>
+    </article>
+  </div>
+
+  <!-- PAGE 3 : COUNTER -->
+  <section class="page wine-paper" id="p-counter" data-label="เวลาของเรา">
+    <div class="counter-layout">
+      <div class="filmstrip" aria-hidden="true">
+        <img data-photo="strip1" alt=""><img data-photo="strip2" alt=""><img data-photo="strip3" alt="">
+      </div>
+      <div class="counter-main">
+        <p class="tag light">No.02 · our time together</p>
+        <h2 class="script big-title light">We've been together for</h2>
+        <div class="tiles" id="tiles">
+          <div class="tile"><b data-u="y">0</b><span>ปี</span></div>
+          <div class="tile"><b data-u="mo">0</b><span>เดือน</span></div>
+          <div class="tile"><b data-u="d">0</b><span>วัน</span></div>
+          <div class="tile"><b data-u="h">0</b><span>ชั่วโมง</span></div>
+          <div class="tile"><b data-u="mi">0</b><span>นาที</span></div>
+          <div class="tile"><b data-u="s">0</b><span>วินาที</span></div>
+        </div>
+        <ul class="totals">
+          <li>หรือ <b id="tDays">0</b> วัน</li>
+          <li><b id="tHours">0</b> ชั่วโมง</li>
+          <li><b id="tMins">0</b> นาที</li>
+          <li><b id="tSecs">0</b> วินาที ♡</li>
+        </ul>
+        <p class="since">since 28 October 2023 · 18:00</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 : MAP -->
+  <section class="page gingham" id="p-map" data-label="ที่ที่เราไป">
+    <div class="sheet paper">
+      <p class="tag">No.03 · places we've been</p>
+      <h2 class="script big-title">Our Little World</h2>
+      <p class="sub">เมืองที่เราไปด้วยกันมาแล้ว — แตะที่แสตมป์เพื่อบินไปดู ✈</p>
+      <div class="map-frame"><div id="map"></div></div>
+      <div class="stamps" id="stamps"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 5 : STATS -->
+  <section class="page stripes" id="p-stats" data-label="สถิติ">
+    <p class="tag light">No.04 · the official records</p>
+    <h2 class="script big-title light">Our Stats</h2>
+    <p class="sub light">บันทึกสถิติความรัก (ที่ยังไม่หยุดนับ)</p>
+    <div class="stat-grid">
+      <div class="stat paper">
+        <div class="stat-ico">🍲</div>
+        <div class="stat-num"><b data-count="100">0</b><i>ครั้ง</i></div>
+        <p class="stat-what">กินโมโม่ด้วยกัน</p>
+        <p class="stat-note">ท้องเต็ม ใจก็เต็ม</p>
+      </div>
+      <div class="stat paper">
+        <div class="stat-ico">🍣</div>
+        <div class="stat-num"><b data-count="3000">0</b><i>ครั้ง</i></div>
+        <p class="stat-what">ซูชิโร่</p>
+        <p class="stat-note">I love you 3000 🍣</p>
+      </div>
+      <button class="stat paper shiba-stat" id="shibaStat">
+        <div class="stat-ico shiba-ico"></div>
+        <div class="stat-num"><b data-count="10000" data-plus>0</b><i>ตัว</i></div>
+        <p class="stat-what">สติกเกอร์หมาชิบะที่ส่งไป</p>
+        <p class="stat-note">แตะเพื่อส่งเพิ่มอีกตัว 🐕</p>
+      </button>
+    </div>
+  </section>
+
+  <!-- PAGE 6 : SKY -->
+  <section class="page wine-paper" id="p-sky" data-label="ท้องฟ้าวันนั้น">
+    <div class="poster paper">
+      <p class="tag">No.05 · the sky that night</p>
+      <h2 class="script big-title">The night we became us</h2>
+      <div class="sky-wrap">
+        <svg id="sky" viewBox="0 0 520 520" role="img" aria-label="แผนที่ดาว 28 ตุลาคม 2023 เวลา 18:00"></svg>
+        <div class="sky-tip" id="skyTip" hidden></div>
+      </div>
+      <p class="sky-caption">28 October 2023 · 18:00 · <span id="skyPlace">Bangkok</span></p>
+      <p class="sky-coords" id="skyCoords"></p>
+      <ul class="sky-facts">
+        <li>🌕 คืนนั้นเป็นคืน <b>พระจันทร์เต็มดวง</b> (Hunter's Moon) กำลังขึ้นทางทิศตะวันออก</li>
+        <li>🌘 และตอนเช้ามืดมี <b>จันทรุปราคาบางส่วน</b> ให้เห็นจากไทยด้วย</li>
+        <li>✨ ดาวพฤหัสฯ กำลังจะโผล่ขึ้นตามดวงจันทร์มา และอีกแค่ 6 วันจะใกล้โลกที่สุดของปี</li>
+      </ul>
+      <label class="toggle"><input type="checkbox" id="skyLines" checked> เส้นกลุ่มดาว</label>
+    </div>
+  </section>
+
+  <!-- PAGE 7 : DREAM -->
+  <section class="page dots-bg" id="p-dream" data-label="ความฝันปีที่ 4">
+    <div class="deco-stars" aria-hidden="true"></div>
+    <p class="tag">No.06 · dream for year four</p>
+    <h2 class="script big-title">Ciao, Italia!</h2>
+    <p class="sub">ความฝันปีที่ 4 ของเรา — ไปอิตาลีด้วยกัน</p>
+
+    <div class="ticket">
+      <div class="t-main">
+        <div class="t-top"><span>✈ LOVE AIRLINES</span><span>BOARDING PASS</span></div>
+        <div class="t-route">
+          <div><small>FROM</small><b>BKK</b><span>Bangkok</span></div>
+          <div class="t-plane">· · · ✈ · · ·</div>
+          <div><small>TO</small><b>FCO</b><span>Roma, Italia</span></div>
+        </div>
+        <div class="t-info">
+          <div><small>PASSENGERS</small><span>You &amp; Me</span></div>
+          <div><small>FLIGHT</small><span>LOVE 04</span></div>
+          <div><small>SEAT</small><span>2A · 2B</span></div>
+          <div><small>BEFORE</small><span>28 OCT 2027</span></div>
+        </div>
+      </div>
+      <div class="t-stub">
+        <small>GATE</small><b>♡</b>
+        <small>CLASS</small><span>Forever</span>
+        <div class="barcode"></div>
+      </div>
+    </div>
+
+    <div class="postcard paper">
+      <div class="flag-stripe"></div>
+      <h3 class="script">Things we'll do in Italy</h3>
+      <ul class="checklist" id="checklist"></ul>
+      <p class="pc-foot">ติ๊กได้เลยเมื่อทำแล้ว ✓ — <span id="dreamProgress"></span></p>
+      <div class="pc-stamp">ITALIA<br><span>♥</span><br>2027</div>
+    </div>
+  </section>
+
+  <!-- PAGE 8 : CARTOON -->
+  <section class="page wine-paper" id="p-us" data-label="เรา">
+    <p class="tag light">No.07 · just us</p>
+    <h2 class="script big-title light">Happy Anniversary, my love</h2>
+    <div class="cartoon-card paper">
+      <div class="bubble" id="bubble">รักนะ ♡</div>
+      <svg id="couple" viewBox="0 0 400 330" aria-label="การ์ตูนรูปคู่ แตะเพื่อเล่นด้วย" role="img"></svg>
+      <p class="sub">แตะที่การ์ตูนได้นะ ♡</p>
+    </div>
+    <p class="final script light">— to many more years —</p>
+    <a class="btn ghost" href="#p-letter">กลับไปหน้าแรก ↑</a>
+  </section>
+
+  <button class="vinyl" id="vinyl" hidden aria-label="เปิด/ปิดเพลงของเรา"><span></span></button>
+  <audio id="song" src="music/our-song.mp3" loop preload="metadata"></audio>
+</main>
+
+<div id="fx" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
